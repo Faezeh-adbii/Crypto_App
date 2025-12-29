@@ -1,26 +1,31 @@
 import chartUp from "../../assets/chart-up.svg";
 import chartDown from "../../assets/chart-down.svg";
+import { RotatingLines } from "react-loader-spinner";
 
-function TableCoin({ coins }) {
+function TableCoin({ coins, isLoading }) {
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th>Coin</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>24h</th>
-            <th>Total Volume</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {coins.map((coin) => (
-            <TableRow key={coin.id} coin={coin} />
-          ))}
-        </tbody>
-      </table>
+      {isLoading ? (
+        <RotatingLines strokeColor="#3874ff" strokeWidth="2" />
+      ) : (
+        <table>
+          <thead>
+            <tr>
+              <th>Coin</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>24h</th>
+              <th>Total Volume</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {coins.map((coin) => (
+              <TableRow key={coin.id} coin={coin} />
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
@@ -50,10 +55,7 @@ const TableRow = ({
       <td>{price_change.toFixed(2)}%</td>
       <td>{total_volume.toLocaleString()}</td>
       <td>
-        <img
-          src={price_change > 0 ? chartUp : chartDown}
-          alt={name}
-        />
+        <img src={price_change > 0 ? chartUp : chartDown} alt={name} />
       </td>
     </tr>
   );
