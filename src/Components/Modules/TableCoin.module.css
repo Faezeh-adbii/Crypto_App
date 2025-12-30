@@ -35,19 +35,19 @@ table th {
 }
 
 .symbol img {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     margin-right: 10px;
 }
 
 .symbol span {
     font-weight: 600;
-    font-size: 2rem;
+    font-size: 1.7rem;
     color: #9fa6b7;
 }
 
 .success {
-    columns: #57bc7c;
+    color: #57bc7c;
 }
 
 .error {
