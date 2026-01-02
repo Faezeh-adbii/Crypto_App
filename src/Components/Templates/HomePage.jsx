@@ -5,16 +5,19 @@ import Pagination from "../Modules/pagination";
 
 function HomePage() {
   const [coins, setCoins] = useState([]);
-  const [isLoading , setIsLoading]=useState(true); 
+  const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    fetch(getCoinList())
+    setIsLoading(true);
+    fetch(getCoinList(page))
       .then((res) => res.json())
       .then((json) => setCoins(json));
-      setIsLoading(false);
-  }, []);
+    setIsLoading(false);
+  }, [page]);
   return (
     <div>
-      <Pagination/>
+      <Pagination page={page} setPage={setPage} />
       <TableCoin coins={coins} isLoading={isLoading} />
     </div>
   );
