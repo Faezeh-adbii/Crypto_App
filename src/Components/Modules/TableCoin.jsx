@@ -5,7 +5,7 @@ import styles from "./TableCoin.module.css";
 
 function TableCoin({ coins, isLoading }) {
   return (
-    <div className={styles.container} >
+    <div className={styles.container}>
       {isLoading ? (
         <RotatingLines strokeColor="#3874ff" strokeWidth="2" />
       ) : (
@@ -53,7 +53,9 @@ const TableRow = ({
       </td>
       <td>{name}</td>
       <td>${current_price.toLocaleString()}</td>
-      <td className={price_change>0 ? styles.success : styles.error }>{price_change.toFixed(2)}%</td>
+      <td className={price_change > 0 ? styles.success : styles.error}>
+        {typeof price_change === "number" ? `${price_change.toFixed(2)}%` : "—"}
+      </td>
       <td>{total_volume.toLocaleString()}</td>
       <td>
         <img src={price_change > 0 ? chartUp : chartDown} alt={name} />
