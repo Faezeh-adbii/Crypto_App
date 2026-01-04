@@ -2,23 +2,26 @@ import React, { useEffect, useState } from "react";
 import TableCoin from "../Modules/Tablecoin";
 import { getCoinList } from "../../Services/cryptoApi";
 import Pagination from "../Modules/pagination";
+import Search from "../Modules/Search";
 
 function HomePage() {
   const [coins, setCoins] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [currency, setCurrency] = useState("USD");
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(getCoinList(page))
+    fetch(getCoinList(page, currency))
       .then((res) => res.json())
       .then((json) => setCoins(json));
     setIsLoading(false);
-  }, [page]);
+  }, [page , currency]);
   return (
     <div>
-      <Pagination page={page} setPage={setPage} />
+      <Search currency={currency} setCurrency={setCurrency} />
       <TableCoin coins={coins} isLoading={isLoading} />
+      <Pagination page={page} setPage={setPage} />
     </div>
   );
 }
