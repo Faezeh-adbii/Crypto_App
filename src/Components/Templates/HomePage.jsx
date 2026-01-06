@@ -12,11 +12,15 @@ function HomePage() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch(getCoinList(page, currency))
-      .then((res) => res.json())
-      .then((json) => setCoins(json));
-    setIsLoading(false);
-  }, [page , currency]);
+    try {
+      fetch(getCoinList(page, currency))
+        .then((res) => res.json())
+        .then((json) => setCoins(json));
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error); 
+    }
+  }, [page, currency]);
   return (
     <div>
       <Search currency={currency} setCurrency={setCurrency} />
