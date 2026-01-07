@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { searchCoin } from "../../Services/cryptoApi";
 import { RotatingLines } from "react-loader-spinner";
-import styles from "./Search.module.css"
+import styles from "./Search.module.css";
 
 function Search({ currency, setCurrency }) {
   const [text, setText] = useState("");
@@ -12,7 +12,7 @@ function Search({ currency, setCurrency }) {
   useEffect(() => {
     const controller = new AbortController();
     setCoins([]);
-    if (!text){
+    if (!text) {
       setIsLoading(false);
       return;
     }
@@ -52,24 +52,26 @@ function Search({ currency, setCurrency }) {
         <option value="eur">EUR</option>
         <option value="jpy">JPY</option>
       </select>
-      <div className={styles.searchResult}>
-        {isloading && (
-          <RotatingLines
-            width="50px"
-            height="50px"
-            strokeWidth="2"
-            strokeColor="#3874ff"
-          />
-        )}
-        <ul>
-          {coins.map((coin) => (
-            <li key={coin.id}>
-              <img src={coin.thumb} alt={coin.name} />
-              <p>{coin.name}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {(!!coins.length || isloading ) && (
+        <div className={styles.searchResult}>
+          {isloading && (
+            <RotatingLines
+              width="50px"
+              height="50px"
+              strokeWidth="2"
+              strokeColor="#3874ff"
+            />
+          )}
+          <ul>
+            {coins.map((coin) => (
+              <li key={coin.id}>
+                <img src={coin.thumb} alt={coin.name} />
+                <p>{coin.name}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
