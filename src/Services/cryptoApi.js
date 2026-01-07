@@ -7,5 +7,9 @@ const getCoinList = (page, currency) => {
 const searchCoin = (query) => {
     return `${BASE_URL}/search?query=${query}&x_cg_demo_api_key=${API_KEY}`;
 };
+const marketChart = (coinId) => {
+    return `${BASE_URL}/coins/${coinId}/market_chart?vs_currency=usd&days=7&x_cg_demo_api_key=${API_KEY}`;
+};
 
-export { getCoinList, searchCoin };
+
+export { getCoinList, searchCoin, marketChart };
